@@ -1,0 +1,47 @@
+
+IP - Address:
+
+An unique identity given to a machine which is used to identify that machine on networks.
+
+Ex:  1.27.0.1 ,   33.0.99.55 
+    0-255
+Port Number: An unique number allocated to every application/software
+
+Ex:  8080 , 5500 , 3000 , 8751 , 65000
+
+
+without JSX
+
+<h1>Hello React</h1>
+
+
+<div className='c1'>
+
+	<p  style='colore:red' > hello world </p>
+</div>
+
+const element1 = React.createElement('p','{style=color:red}',"hello world")
+
+
+const element = React.createElement('div',null, element1);
+
+
+
+
+
+
+
+
+
+class   MyComponent {
+
+		<h1  className	="cls1" >Hello world</h1>
+
+
+
+}
+
+
+
+
+
