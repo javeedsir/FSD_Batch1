@@ -1,0 +1,167 @@
+
+Lifting State up in ReactJS
+===============================
+Lifting stateup is a technique to use Parent component state into child component state.
+
+
+ex:
+----
+App.js
+--------
+import React, { Component } from 'react'
+import User from "./User";
+export default class App extends Component {
+        state={
+                name:"Alan"
+        }
+        render() {
+                return <User/>
+                       
+            
+        }
+}
+
+User.js
+-------
+ import React, { Component } from 'react'
+import App from "./App";
+export default class User extends Component {
+    render() {
+        return (
+            
+                <div>{this.state.name}</div>
+         
+        )
+    }
+}
+        
+index.js
+----------
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
+
+Note:
+----
+In above example, we will get compile time error.
+
+To use parent state in child component  then we can to use props.
+
+ex:
+
+App.js
+-----
+import React, { Component } from 'react'
+import User from "./User";
+export default class App extends Component {
+        state={
+                name:"Alan"
+        }
+        render() {
+                return <User name={this.state.name}/>
+                       
+            
+        }
+}
+
+User.js
+-------
+import React, { Component } from 'react'
+import App from "./App";
+export default class User extends Component {
+    render() {
+        return (
+            
+                <div>{this.props.name}</div>
+         
+        )
+    }
+}
+
+index.js
+-----------
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
+ex:2
+-----
+
+App.js
+--------
+import React, { Component } from 'react'
+import Guest from './Guest';
+import User from "./User";
+export default class App extends Component {
+        state={
+                name:"Alan"
+        }
+        render() {
+                return <div>
+                        <User name={this.state.name}/>
+                         <Guest name={this.state.name}/>       
+                        </div>                       
+            
+        }
+}
+
+User.js
+--------
+import React, { Component } from 'react'
+import App from "./App";
+export default class User extends Component {
+    render() {
+        return (
+            
+                <div>{this.props.name}</div>
+         
+        )
+    }
+}
+
+Guest.js
+--------
+import React, { Component } from 'react'
+
+export default class Guest extends Component {
+    render() {
+        return (
+            
+                <div><h1>{this.props.name}</h1></div>
+         
+        )
+    }
+}
+
+
+index.js
+---------
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
