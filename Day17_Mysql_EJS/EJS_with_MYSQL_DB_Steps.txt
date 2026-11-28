@@ -1,0 +1,98 @@
+Database setup
+Note: mysql database software should be installed in your machine
+
+1.Create new database
+
+create  database  upgrad_db;
+
+2. create Employees table and insert records
+
+ CREATE TABLE  Employees(id integer(3) primary key , ename  varchar(20) , salary  decimal, doj  DATE  );
+
+INSERT INTO Employees values(101,'king',90000.0,'1990-03-23');
+INSERT INTO Employees values(102,'smith',30000.0,'1990-03-23');
+INSERT INTO Employees values(103,'ford',40000.0,'1998-01-19');
+INSERT INTO Employees values(104,'ravi',25000.0, current_date -1 );
+INSERT INTO Employees values(105,'Javeed',65000.0, current_date + 1 );
+
+
+Select * from Employees;
+
+
+Express.js  App and Mysql setup
+1. mkdir  my-express-app
+2. >my-express-app> npm install express
+3. > my-express-app> npm install mysql2
+
+
+Note: we should have NodeJS server installed in our machines before installing expressJS.
+
+index.js(create this file and write below code)
+
+
+import  express from 'express'
+import mysql from 'mysql2/promise'
+
+const app =  express();
+
+const PORT = 3000;
+
+app.listen(PORT , ()=>{
+
+        console.log(`Server Running on PORT ${PORT}`);
+
+} );
+
+
+const pool = mysql.createPool(
+        {
+
+            host:'localhost',
+            user:'root',
+            password:'admin',
+            database:'upgrad_db'
+
+        }
+
+);
+
+
+
+
+app.get('/employees' , async (req,res)=>{
+
+
+        try{
+
+            const  [rows]  =  await  pool.query("select * from Employees");
+
+                res.json(rows);
+        }
+        catch(error){
+
+                res.status(500).json({message:"Database Query failed"})
+
+
+        }
+
+
+});
+
+
+-------------------------
+
+Now, open my-express-app (folder) in command prompt and run below command to execute ExpressJS app to connect with 
+MYSQL DB(Employees table) 
+
+>my-express-app> node --watch  index.js
+
+
+
+
+
+
+
+
+
+
+
